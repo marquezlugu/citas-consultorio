@@ -18,5 +18,6 @@ class Agenda:
         self._appointments.append(appointment)
 
     def for_day(self, doctor, day: date):
-        return [a for a in self._appointments
-                if a.doctor == doctor and a.start.date() == day]
+        day_appointments = [a for a in self._appointments
+                            if a.doctor == doctor and a.start.date() == day]
+        return sorted(day_appointments, key=lambda a: a.start)

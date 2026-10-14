@@ -19,6 +19,15 @@ class AgendaTest(unittest.TestCase):
 
         self.assertEqual([a.patient for a in result], ["María"])
 
+    def test_for_day_is_sorted_by_hour(self):
+        agenda = Agenda()
+        agenda.add(Appointment("Dra. Pérez", "Rosa", datetime(2026, 10, 20, 11)))
+        agenda.add(Appointment("Dra. Pérez", "María", datetime(2026, 10, 20, 9)))
+
+        result = agenda.for_day("Dra. Pérez", date(2026, 10, 20))
+
+        self.assertEqual([a.patient for a in result], ["María", "Rosa"])
+
 
 if __name__ == "__main__":
     unittest.main()
