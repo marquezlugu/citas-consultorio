@@ -25,3 +25,8 @@ class Agenda:
     def available_slots(self, doctor, day: date, hours=range(8, 17)):
         taken = {a.start.hour for a in self.for_day(doctor, day)}
         return [datetime(day.year, day.month, day.day, h) for h in hours if h not in taken]
+
+    def book(self, doctor, patient, start: datetime):
+        appointment = Appointment(doctor, patient, start)
+        self.add(appointment)
+        return appointment
